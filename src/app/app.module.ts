@@ -11,6 +11,9 @@ import { LoginPageComponent } from 'src/app/pages/login-page/login-page.componen
 import { SignupPageComponent } from 'src/app/pages/signup-page/signup-page.component';
 import { CartPageComponent } from 'src/app/pages/cart-page/cart-page.component';
 
+//Rotas
+import { Routing, RoutingProviders } from './app.routing';
+
 
 
 
@@ -30,7 +33,8 @@ import { CartPageComponent } from 'src/app/pages/cart-page/cart-page.component';
     CartPageComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    Routing
   ],
   providers: [],
   bootstrap: [AppComponent]
