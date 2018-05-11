@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 
 
 @Injectable({
@@ -8,5 +8,17 @@ import { Observable } from 'rxjs';
 })
 export class CartService {
 
-  constructor() { }
+  public items: any[] = [];
+  cartChange: Observable<any>;
+  cartChangeObserver: Observer<any>;
+  constructor() { 
+    this.cartChange = new Observable((observer: Observer<any>) =>{
+      this.cartChangeObserver = observer;
+    });
+  }
+
+  addItem(item){
+    this.items.push(item);
+    this.cartChangeObserver.next(this.items);
+  }
 }

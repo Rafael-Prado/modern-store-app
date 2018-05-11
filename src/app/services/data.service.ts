@@ -10,13 +10,13 @@ import { error } from '@angular/compiler/src/util';
 })
 export class DataService {
 
+  private serviceUrl: string = 'http://localhost:1771/';
  
   constructor(private http: Http) { }
 
-  getCustomer(){
-    let customer: any = []
+  CreateUser(data: any){
     return this.http
-    .get('http://localhost:1771/v1/products')
+    .post(this.serviceUrl + 'v1/customers', data)
     .pipe(map(response => response.json()));  
   }
 }

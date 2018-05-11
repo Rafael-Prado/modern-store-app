@@ -19,10 +19,8 @@ import { CartPageComponent } from 'src/app/pages/cart-page/cart-page.component';
 //Rotas
 import { Routing, RoutingProviders } from './app.routing';
 
-
-
-
-
+//Services
+import { CartService } from './services/cart.service';
 
 
 @NgModule({
@@ -44,7 +42,7 @@ import { Routing, RoutingProviders } from './app.routing';
     HttpModule,
     Routing
   ],
-  providers: [],
+  providers: [CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

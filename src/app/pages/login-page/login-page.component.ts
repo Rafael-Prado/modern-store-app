@@ -33,12 +33,12 @@ export class LoginPageComponent implements OnInit {
 
 
   ngOnInit() { 
-    console.log( this.dataService.getCustomer()
-    .subscribe(result =>{
-      console.log(result);
-    }, error => {
-       console.log(error);
-    }));
+    // console.log( this.dataService.getCustomer()
+    // .subscribe(result =>{
+    //   console.log(result);
+    // }, error => {
+    //    console.log(error);
+    // }));
   }
 
   checkEmail(){
