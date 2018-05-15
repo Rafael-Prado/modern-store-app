@@ -1,3 +1,4 @@
+import { error } from '@angular/compiler/src/util';
 import { Observable } from 'rxjs';
 
 import { SubMenuComponent } from './../../Componets/shared/sub-menu/sub-menu.component';
@@ -6,6 +7,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { CustomValidator } from './../../validators/custom.validator';
 import { UI } from './../../utils/ui';
 import { DataService } from './../../services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -13,42 +15,36 @@ import { DataService } from './../../services/data.service';
   providers: [UI, DataService]
 })
 export class LoginPageComponent implements OnInit {
-  public form: FormGroup;
+  public form: FormGroup;  
+  public errors: any[] = [];
 
-  constructor(private fb: FormBuilder, private ui: UI, private dataService: DataService) { 
+  constructor(private fb: FormBuilder, private ui: UI, private dataService: DataService, private router: Router) { 
     this.form = this.fb.group({
-      username: ['', Validators.compose([
+      UserName: ['', Validators.compose([
         Validators.minLength(5),
         Validators.maxLength(160),
-        Validators.required,
-        CustomValidator.EmailValidator
+        Validators.required
+        //CustomValidator.EmailValidator
       ])],
-      password: ['', Validators.compose([
+      Password: ['', Validators.compose([
         Validators.minLength(6),
         Validators.maxLength(20),
         Validators.required
       ])]
     });
+    this.checktoken();
   }
 
+  checktoken(){
+    var token = localStorage.getItem('mws.token');
+    if (this.dataService.validateToken(token)) {
+      this.router.navigateByUrl('/home');
+    }
+  }
 
   ngOnInit() { 
-    // console.log( this.dataService.getCustomer()
-    // .subscribe(result =>{
-    //   console.log(result);
-    // }, error => {
-    //    console.log(error);
-    // }));
   }
 
-  checkEmail(){
-    this.ui.lock('usernameControl');
-    setTimeout(() => {
-      this.ui.unlock('usernameControl');
-      console.log(this.form.controls['username'].value)
-    }, 3000)
-     
-  }
 
   showModal(){
     this.ui.setActive('modal');
@@ -59,7 +55,14 @@ export class LoginPageComponent implements OnInit {
   }
 
   submit(){
-    
+    this.dataService.authenticate(this.form.value)
+    .subscribe(result => {
+      localStorage.setItem('mws.token', result.token)
+      localStorage.setItem('mws.user', JSON.stringify(result.user));
+      this.router.navigateByUrl('/home')
+    }, error => {
+      this.errors = JSON.parse(error._body).errors;
+    });
   }
 
 }

@@ -21,6 +21,7 @@ import { Routing, RoutingProviders } from './app.routing';
 
 //Services
 import { CartService } from './services/cart.service';
+import { AuthService } from './services/auth.service';
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import { CartService } from './services/cart.service';
     HttpModule,
     Routing
   ],
-  providers: [CartService],
+  providers: [CartService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

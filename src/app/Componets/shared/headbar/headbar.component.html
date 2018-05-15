@@ -14,6 +14,9 @@
           </div>
           <div id="navbarMenuHeroA" class="navbar-menu">
             <div class="navbar-end">
+                <a class="navbar-item ">
+                  Bem vindo {{ user }}
+                </a>
               <a class="navbar-item " routerLink="/home">
                 Home
               </a>
@@ -24,7 +27,7 @@
                 Meu Perfil
               </a>
               <span class="navbar-item">
-                <a class="button is-primary is-inverted" routerLink="/">
+                <a class="button is-primary is-inverted" (click)= "logout()">
                   <span class="icon">
                     <i class="fab fa fa-power-off"></i>
                   </span>

@@ -6,15 +6,20 @@
         </h1>
         <div class="columns">
           <div class="column is-half is-offset-one-quarter">
+              <div class="notification is-danger" *ngIf="errors.length > 0">
+                  <ul>
+                    <li *ngFor="let err of errors">{{err.message}}</li>
+                  </ul>
+                </div>
            <form [formGroup]="form">
               <p class="control" id="usernameControl">
-                <input class="input is-large" type="email" (blur)="checkEmail()" placeholder="Usuário" formControlName="username" [ngClass]=" {'is-danger': (!form.controls.username.valid && !form.controls.username.pristine) }">
-                <span class="tag is-danger" *ngIf="!form.controls.username.valid && !form.controls.username.pristine">Usuário inválido</span>
+                <input class="input is-large" type="UserName" placeholder="Usuário" formControlName="UserName" [ngClass]=" {'is-danger': (!form.controls.UserName.valid && !form.controls.UserName.pristine) }">
+                <span class="tag is-danger" *ngIf="!form.controls.UserName.valid && !form.controls.UserName.pristine">Usuário inválido</span>
               </p>
               <br>
               <p class="control">
-                <input class="input is-large" type="password" placeholder="Senha" formControlName="password" [ngClass]=" {'is-danger': (!form.controls.password.valid && !form.controls.password.pristine) }">
-                <span class="tag is-danger" *ngIf="!form.controls.password.valid && !form.controls.password.pristine">Senha inválida</span>
+                <input class="input is-large" type="Password" placeholder="Senha" formControlName="Password" [ngClass]=" {'is-danger': (!form.controls.Password.valid && !form.controls.Password.pristine) }">
+                <span class="tag is-danger" *ngIf="!form.controls.Password.valid && !form.controls.Password.pristine">Senha inválida</span>
               </p>
               <br>
               <p>
