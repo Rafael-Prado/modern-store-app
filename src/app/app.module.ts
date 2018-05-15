@@ -22,6 +22,7 @@ import { Routing, RoutingProviders } from './app.routing';
 //Services
 import { CartService } from './services/cart.service';
 import { AuthService } from './services/auth.service';
+import { NumberDirective } from './directives/number.directive';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AuthService } from './services/auth.service';
     HomePageComponent,
     LoginPageComponent,
     SignupPageComponent,
-    CartPageComponent
+    CartPageComponent,
+    NumberDirective
   ],
   imports: [
     BrowserModule,
