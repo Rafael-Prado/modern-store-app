@@ -11,15 +11,18 @@ export class HeadbarComponent implements OnInit {
   public totalItems: number = 0;
   public user: string = '';
 
-  constructor(private cartSevice: CartService, private router: Router) {
-    this.cartSevice.cartChange.subscribe((data) =>{
-      this.totalItems = length;
+  constructor(private cartService: CartService, private router: Router) {
+    this.cartService.cartChange.subscribe((data) => {
+      this.totalItems = data.length;
     });
+
     var data:any = JSON.parse(localStorage.getItem('mws.user'));
     if(data){
       this.user = data.name;
     }
-   }
+
+    this.cartService.load();
+  }
 
   ngOnInit() {
   }

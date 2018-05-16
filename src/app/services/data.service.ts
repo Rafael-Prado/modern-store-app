@@ -34,4 +34,10 @@ export class DataService {
     }
     return true;
   }
+
+  getProducts(){
+    return this.http
+    .get(this.serviceUrl + 'v1/products')
+    .pipe(map((res: Response) => res.json()));
+  }
 }
